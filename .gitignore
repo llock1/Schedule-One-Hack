@@ -1,0 +1,9 @@
+.dll
+x64/
+x86/
+bin/
+Debug/
+Release/
+.ipch
+.db
+.vs/

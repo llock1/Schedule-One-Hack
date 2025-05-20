@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\console">
+      <UniqueIdentifier>{42921c7b-50d9-453c-b65d-189f75c24403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hooks">
+      <UniqueIdentifier>{ebed7bb5-2d49-4e54-be66-efb17f9faac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libs">
+      <UniqueIdentifier>{1b72d964-04a6-4b80-bc55-8a9e4fe1177e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libs\ImGui">
+      <UniqueIdentifier>{852d403e-e2b9-4eca-87ff-0886600786bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{fdb2d22d-de55-4bd7-ad88-390bd405cfcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\features">
+      <UniqueIdentifier>{93b95f96-7056-43be-8d30-07e6a89b42ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\offsets">
+      <UniqueIdentifier>{c14157bf-f1b3-434f-9af2-b76f8483ba41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\classes">
+      <UniqueIdentifier>{e59b9f85-4711-4643-b422-750c9f8ff00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\classes\player">
+      <UniqueIdentifier>{b043c7c0-b832-4b29-8b7d-d04dfba1efe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\memory">
+      <UniqueIdentifier>{8f9a1039-1b80-45ab-a3ac-a99eb3038504}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="console.h">
+      <Filter>Source Files\console</Filter>
+    </ClInclude>
+    <ClInclude Include="hooks.h">
+      <Filter>Source Files\hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGui\imconfig.h">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGui\imgui.h">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGui\imgui_impl_dx11.h">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGui\imgui_impl_win32.h">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGui\imgui_internal.h">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGui\imstb_rectpack.h">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGui\imstb_textedit.h">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGui\imstb_truetype.h">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui.h">
+      <Filter>Source Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="features.h">
+      <Filter>Source Files\features</Filter>
+    </ClInclude>
+    <ClInclude Include="offsets.h">
+      <Filter>Source Files\offsets</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Source Files\classes\player</Filter>
+    </ClInclude>
+    <ClInclude Include="memory.h">
+      <Filter>Source Files\memory</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="console.cpp">
+      <Filter>Source Files\console</Filter>
+    </ClCompile>
+    <ClCompile Include="hooks.cpp">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\ImGui\imgui.cpp">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\ImGui\imgui_demo.cpp">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\ImGui\imgui_draw.cpp">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\ImGui\imgui_impl_dx11.cpp">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\ImGui\imgui_impl_win32.cpp">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\ImGui\imgui_tables.cpp">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\ImGui\imgui_widgets.cpp">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="features.cpp">
+      <Filter>Source Files\features</Filter>
+    </ClCompile>
+    <ClCompile Include="memory.cpp">
+      <Filter>Source Files\memory</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
