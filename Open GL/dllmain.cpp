@@ -5,6 +5,7 @@
 #include "ui.h"
 #include "features.h"
 #include "player.h"
+#include "libs/IL2CPP_Resolver/IL2CPP_Resolver.hpp"
 
 using namespace Cheat;
 
@@ -19,12 +20,13 @@ int MainThread(HMODULE hModule) {
     
     if (MH_Initialize() != MH_OK) {
         g_Console->Log(LogType::Success, "ERROR");
-    }
+        return 0;
+    } 
     else {
         g_Console->Log(LogType::Success, "MinHook Initialized");
     }
     g_Hooks->InitHooks();
-    
+
     Features::FeatureLoop();
     
     g_Hooks->CleanUp();

@@ -9,6 +9,7 @@ namespace Cheat {
 		extern bool InfiniteMoney;
 		extern bool PoliceDontNoticeDrugDeal;
 		extern bool PoliceDontSeeAfterCurfew;
+		extern bool NeverWanted;
 
 		extern void SomeFunction();
 		extern void Unload();

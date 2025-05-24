@@ -12,5 +12,6 @@ namespace Cheat {
 		const uintptr_t policeRespondToAimedAt = 0x5980C0;  // 5868176
 		const uintptr_t policeRespondToDrugDeal = 0x597870;  // 5865728
 		const uintptr_t policeSeeAfterCurfew = 0x598580;
+		const uintptr_t isArrested = 0x6B0E10;
 	}
 }

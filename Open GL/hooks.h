@@ -23,6 +23,14 @@ namespace Cheat {
 //        "TypeSignature" : "viii"
 //    }
 
+        //{
+//    "Address": 7015952,
+//        "Name" : "ScheduleOne.PlayerScripts.Player$$set_IsArrested",
+//        "Signature" : "void ScheduleOne_PlayerScripts_Player__set_IsArrested (ScheduleOne_PlayerScripts_Player_o* __this, bool value, const MethodInfo* method);",
+//        "TypeSignature" : "viii"
+//    },
+
+
        static void __stdcall take_player_damage_hook(DWORD* __this, float damage, bool flinch, bool playBloodMist, DWORD* method);
        static void __stdcall police_respond_to_lethal_attack_hook(DWORD* __this, DWORD* perpetrator, DWORD* impact, DWORD* method);
        static void __stdcall police_respond_to_first_nonlethal_attack_hook(DWORD* __this, DWORD* perpetrator, DWORD* impact, DWORD* method);
@@ -31,6 +39,7 @@ namespace Cheat {
        static void __stdcall police_respond_to_aimed_at_hook(DWORD* __this, DWORD* player, DWORD* method);
        static void __stdcall police_notice_drug_deal_hook(DWORD* __this, DWORD* player, DWORD* method);
        static void __stdcall police_see_after_curfew_hook(DWORD* __this, DWORD* player, DWORD* method);
+       static void __stdcall is_arrested_hook(DWORD* __this, bool value, DWORD* method);
 
     };
 

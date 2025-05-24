@@ -7,12 +7,19 @@
 
 namespace Cheat {
 	namespace Features {
+
+		
+
+		// game funcs
+		using GiraffeHead = void(*)(DWORD* player, float value, const void* method);
+
 		// bools
 		bool GodMode = false;
 		bool PoliceDontDoAnything = false;
 		bool InfiniteMoney = false;
 		bool PoliceDontNoticeDrugDeal = false;
 		bool PoliceDontSeeAfterCurfew = false;
+		bool NeverWanted = false;
 
 		// functions
 		void SomeFunction() {
@@ -72,9 +79,7 @@ namespace Cheat {
 				}
 
 				if (InfiniteMoney) {
-					if (g_Player->Money < 999999.0f) {
-						g_Player->Money = 999999.0f;
-					}
+					
 				}
 
 				if (PoliceDontNoticeDrugDeal != lastPoliceDontNoticeDrugDeal) {

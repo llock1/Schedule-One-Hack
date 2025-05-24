@@ -46,6 +46,11 @@ namespace Cheat {
                 int* num = std::get<int*>(entry.data);
                 *num -= numToIncreaseBy;
             }
+
+            if (entry.type == MenuEntryType::Float) {
+                float* num = std::get<float*>(entry.data);
+                *num -= numToIncreaseBy;
+            }
         }
 
         if (ImGui::IsKeyPressed(ImGuiKey_RightArrow)) {
@@ -55,6 +60,11 @@ namespace Cheat {
 
             if (entry.type == MenuEntryType::Int) {
                 int* num = std::get<int*>(entry.data);
+                *num += numToIncreaseBy;
+            }
+
+            if (entry.type == MenuEntryType::Float) {
+                float* num = std::get<float*>(entry.data);
                 *num += numToIncreaseBy;
             }
         }
@@ -98,7 +108,7 @@ namespace Cheat {
 
         std::string positionText = std::format("{} / {}", (selectedIndex + 1), GetCurrentItemCount());
         ImVec2 textSize2 = ImGui::CalcTextSize(positionText.c_str());
-        ImGui::SetCursorPosX(menuWidth - textSize2.x);
+        ImGui::SetCursorPosX(menuWidth - textSize2.x - 20);
         ImGui::TextUnformatted(positionText.c_str());
 
         ImGui::Spacing();
@@ -152,7 +162,10 @@ namespace Cheat {
             else if (entry.type == MenuEntryType::Int) {
                 int* num = std::get<int*>(entry.data);
                 rightText = std::format("< {} >", *num);
-            }
+            } else if (entry.type == MenuEntryType::Float) {
+                float* num = std::get<float*>(entry.data);
+                rightText = std::format("< {} >", *num);
+            } 
 
             ImVec2 leftSize = ImGui::CalcTextSize(leftText.c_str());
             ImVec2 rightSize = ImGui::CalcTextSize(rightText.c_str());
@@ -180,6 +193,11 @@ namespace Cheat {
         case MenuPage::Player: return playerItems;
         case MenuPage::Settings: return settingsItems;
         case MenuPage::Police: return policeItems;
+        case MenuPage::Skateboard:
+            if (g_Player->isSkating) {
+                return skateboardItems;
+            }
+            return settingsItems;
         }
         static std::vector<MenuEntry> empty;
         return empty;

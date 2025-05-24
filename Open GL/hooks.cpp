@@ -5,69 +5,8 @@
 #include "offsets.h"
 #include "memory.h"
 #include "player.h"
-
-
-//{
-//    "Address": 5866880,
-//        "Name" : "ScheduleOne.Police.NPCResponses_Police$$NoticedViolatingCurfew",
-//        "Signature" : "void ScheduleOne_Police_NPCResponses_Police__NoticedViolatingCurfew (ScheduleOne_Police_NPCResponses_Police_o* __this, ScheduleOne_PlayerScripts_Player_o* player, const MethodInfo* method);",
-//        "TypeSignature" : "viii"
-//    },
-//    {
-//      "Address": 5868816,
-//      "Name" : "ScheduleOne.Police.NPCResponses_Police$$RespondToFirstNonLethalAttack",
-//      "Signature" : "void ScheduleOne_Police_NPCResponses_Police__RespondToFirstNonLethalAttack (ScheduleOne_Police_NPCResponses_Police_o* __this, ScheduleOne_PlayerScripts_Player_o* perpetrator, ScheduleOne_Combat_Impact_o* impact, const MethodInfo* method);",
-//      "TypeSignature" : "viiii"
-//    },
-
-
-
-
-//{
-//    "Address": 5868816,
-//        "Name" : "ScheduleOne.Police.NPCResponses_Police$$RespondToFirstNonLethalAttack",
-//        "Signature" : "void ScheduleOne_Police_NPCResponses_Police__RespondToFirstNonLethalAttack (ScheduleOne_Police_NPCResponses_Police_o* __this, ScheduleOne_PlayerScripts_Player_o* perpetrator, ScheduleOne_Combat_Impact_o* impact, const MethodInfo* method);",
-//        "TypeSignature" : "viiii"
-//    },
-//    {
-//      "Address": 5869088,
-//      "Name" : "ScheduleOne.Police.NPCResponses_Police$$RespondToLethalAttack",
-//      "Signature" : "void ScheduleOne_Police_NPCResponses_Police__RespondToLethalAttack (ScheduleOne_Police_NPCResponses_Police_o* __this, ScheduleOne_PlayerScripts_Player_o* perpetrator, ScheduleOne_Combat_Impact_o* impact, const MethodInfo* method);",
-//      "TypeSignature" : "viiii"
-//    },
-//    {
-//      "Address": 5869344,
-//      "Name" : "ScheduleOne.Police.NPCResponses_Police$$RespondToRepeatedNonLethalAttack",
-//      "Signature" : "void ScheduleOne_Police_NPCResponses_Police__RespondToRepeatedNonLethalAttack (ScheduleOne_Police_NPCResponses_Police_o* __this, ScheduleOne_PlayerScripts_Player_o* perpetrator, ScheduleOne_Combat_Impact_o* impact, const MethodInfo* method);",
-//      "TypeSignature" : "viiii"
-//    },
-//    {
-//      "Address": 5868384,
-//      "Name" : "ScheduleOne.Police.NPCResponses_Police$$RespondToAnnoyingImpact",
-//      "Signature" : "void ScheduleOne_Police_NPCResponses_Police__RespondToAnnoyingImpact (ScheduleOne_Police_NPCResponses_Police_o* __this, ScheduleOne_PlayerScripts_Player_o* perpetrator, ScheduleOne_Combat_Impact_o* impact, const MethodInfo* method);",
-//      "TypeSignature" : "viiii"
-//    },
-//    {
-//      "Address": 5868176,
-//      "Name" : "ScheduleOne.Police.NPCResponses_Police$$RespondToAimedAt",
-//      "Signature" : "void ScheduleOne_Police_NPCResponses_Police__RespondToAimedAt (ScheduleOne_Police_NPCResponses_Police_o* __this, ScheduleOne_PlayerScripts_Player_o* player, const MethodInfo* method);",
-//      "TypeSignature" : "viii"
-//    },
-
-
-//{
-//    "Address": 5865728,
-//        "Name" : "ScheduleOne.Police.NPCResponses_Police$$NoticedDrugDeal",
-//        "Signature" : "void ScheduleOne_Police_NPCResponses_Police__NoticedDrugDeal (ScheduleOne_Police_NPCResponses_Police_o* __this, ScheduleOne_PlayerScripts_Player_o* player, const MethodInfo* method);",
-//        "TypeSignature" : "viii"
-//    }
-
-//{
-//    "Address": 5866880,
-//        "Name" : "ScheduleOne.Police.NPCResponses_Police$$NoticedViolatingCurfew",
-//        "Signature" : "void ScheduleOne_Police_NPCResponses_Police__NoticedViolatingCurfew (ScheduleOne_Police_NPCResponses_Police_o* __this, ScheduleOne_PlayerScripts_Player_o* player, const MethodInfo* method);",
-//        "TypeSignature" : "viii"
-//    },
+#include "features.h"
+#include <string>
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 void(__fastcall* take_player_damage_o)(DWORD*, float, bool, bool, const DWORD*);
@@ -78,6 +17,7 @@ void(__fastcall* police_respond_to_annoying_impact_o)(DWORD*, DWORD*, DWORD*, DW
 void(__fastcall* police_respond_to_aimed_at_o)(DWORD*, DWORD*, DWORD*);
 void(__fastcall* police_notice_drug_deal_o)(DWORD*, DWORD*, DWORD*);
 void(__fastcall* police_see_after_curfew_o)(DWORD*, DWORD*, DWORD*);
+void(__fastcall* is_arrested_o)(DWORD*, bool, DWORD*);
 
 
 namespace Cheat {
@@ -122,7 +62,7 @@ namespace Cheat {
                 DXGI_SWAP_CHAIN_DESC sd;
                 pSwapChain->GetDesc(&sd);
                 g_hWnd = sd.OutputWindow;
-
+                 
                 CreateRenderTarget(pSwapChain);
 
                 ImGui::CreateContext();
@@ -157,17 +97,17 @@ namespace Cheat {
 
     void Hooks::InitHooks() {
 
-        gameAssemblyBase = (uintptr_t)GetModuleHandle(L"GameAssembly.dll");
-        uintptr_t basePtr = gameAssemblyBase + 0x03AC5720;
 
-        std::vector<uintptr_t> offsets = { 0x1E0, 0x20, 0xB8, 0x20, 0x50, 0xE0, 0x140 };
+
+        gameAssemblyBase = (uintptr_t)GetModuleHandle(L"GameAssembly.dll");
+        uintptr_t basePtr = gameAssemblyBase + 0x03B08DB0;
+
+        std::vector<uintptr_t> offsets = { 0x40, 0xC8, 0x28, 0x48, 0xB8, 0x48, 0x0 };
         uintptr_t playerAddress = Memory::ResolvePointerChain(basePtr, offsets);
 
-
-
-        if (playerAddress == NULL) {
-            printf("WHAT THE FUCK");
-            return;
+        while (playerAddress == NULL) {
+            Sleep(100);
+            playerAddress = Memory::ResolvePointerChain(basePtr, offsets);
         }
 
 
@@ -177,6 +117,12 @@ namespace Cheat {
             return;
         }
         printf("Local Player Address: 0x%p\n", g_Player);
+
+        std::string floatStr = std::to_string(g_Player->playerHealth->currentHealth);
+        std::string skateStr = std::to_string(g_Player->isSkating);
+
+        g_Console->Log(LogType::Debug, floatStr.c_str());
+        g_Console->Log(LogType::Debug, skateStr.c_str());
 
         DXGI_SWAP_CHAIN_DESC sd = {};
         sd.BufferCount = 1;
@@ -286,6 +232,16 @@ namespace Cheat {
             g_Console->Log(LogType::Success, "Hooked police seeing after curfew");
         }
 
+        if (MH_CreateHook(reinterpret_cast<LPVOID*>(gameAssemblyBase + Offsets::isArrested),
+            &is_arrested_hook, (LPVOID*)&is_arrested_o) != MH_OK) {
+            g_Console->Log(LogType::Error, "failed to hook is arrested");
+        }
+        else {
+            g_Console->Log(LogType::Success, "Hooked is arrested");
+        }
+
+        MH_EnableHook(reinterpret_cast<LPVOID*>(gameAssemblyBase + Offsets::isArrested));
+
     }
 
     void __stdcall Hooks::take_player_damage_hook(DWORD* __this, float damage, bool flinch, bool playBloodMist, DWORD* method) {
@@ -321,6 +277,18 @@ namespace Cheat {
 
     void __stdcall Hooks::police_see_after_curfew_hook(DWORD* __this, DWORD* player, DWORD* method) {
         return;
+    }
+
+    void __stdcall Hooks::is_arrested_hook(DWORD* __this, bool value, DWORD* method) {
+
+        if (&Features::NeverWanted) {
+            g_Console->Log(LogType::Debug, "NOT ARRESTED");
+            value = false;
+        }
+
+        g_Console->Log(LogType::Debug, "ARRESTED");
+
+        return is_arrested_o(__this, value, method);
     }
 
 
