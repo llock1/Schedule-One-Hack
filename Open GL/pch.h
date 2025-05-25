@@ -6,6 +6,8 @@
 
 #ifndef PCH_H
 #define PCH_H
+#define IMGUI_ENABLE_VIEWPORTS
+
 
 // add headers that you want to pre-compile here
 #include "framework.h"
@@ -26,6 +28,7 @@
 #include "libs/ImGui/imgui_internal.h"
 #include "libs/ImGui/imgui_Impl_dx11.h"
 #include "libs/ImGui/imgui_Impl_win32.h"
+
 
 
 #endif //PCH_H

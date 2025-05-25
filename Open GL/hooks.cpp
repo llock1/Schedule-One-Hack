@@ -76,6 +76,9 @@ namespace Cheat {
 
                 oWndProc = (WNDPROC)SetWindowLongPtr(g_hWnd, GWLP_WNDPROC, (LONG_PTR)hkWndProc);
 
+                g_UI->AddToast("Initalised", 5.0f);
+                g_UI->AddToast("Hooks Initalised", 5.0f);
+
                 initialized = true;
             }
         }
@@ -86,6 +89,7 @@ namespace Cheat {
         ImGui::NewFrame();
 
         g_UI->HandleInput();
+        
         g_UI->Render();
 
         ImGui::Render();

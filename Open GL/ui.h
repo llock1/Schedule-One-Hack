@@ -14,6 +14,7 @@ namespace Cheat {
         Button,
         Int,
         Float,
+        FloatButton,
     };
 
     enum class MenuPage {
@@ -36,6 +37,9 @@ namespace Cheat {
         float maxFloat;
         float minFloat;
 
+        std::function<float()> getFloat;
+        std::function<void(float)> setFloat;
+
         MenuEntry(std::string label, bool* togglePtr)
             : label(std::move(label)), type(MenuEntryType::Toggle), data(togglePtr) {
         }
@@ -52,11 +56,18 @@ namespace Cheat {
             : label(std::move(label)), type(MenuEntryType::Int), data(num), maxInt(maxNum), minInt(minNum) {
         }
 
-        MenuEntry(std::string label, float* num, float maxNum, float minNum)
-            : label(std::move(label)), type(MenuEntryType::Float), data(num), maxFloat(maxNum), minFloat(minNum) {
+        MenuEntry(std::string label, std::function<float()> setNum, std::function<void(float)> setFloat, float maxNum, float minNum)
+            : label(std::move(label)), type(MenuEntryType::Float), getFloat(setNum), setFloat(setFloat), maxFloat(maxNum), minFloat(minNum) {
         }
     };
 
+    struct SimpleToast {
+        std::string text;
+        float timer;   // Current remaining time
+        float maxTime; // Total lifetime
+    };
+
+    
 
 
     class UI {
@@ -67,6 +78,11 @@ namespace Cheat {
         float example = 0.0f;
 
         MenuPage currentPage = MenuPage::Main;
+
+        std::vector<SimpleToast> toasts;
+        void RenderToasts();
+        void AddToast(const std::string& msg, float duration);
+
 
         std::vector<MenuPage> MenuStack = {
             MenuPage::Main,
@@ -82,12 +98,33 @@ namespace Cheat {
         };
          
         std::vector<MenuEntry> skateboardItems = {
-            MenuEntry("Gravity", &example, 100.0f, -100.0f),
-        };
+            MenuEntry("Gravity",
+                []() -> float {
+                    return g_Player->isSkating ? g_Player->skateboard->gravity : 0.0f;
+                },
+                [](float val) {
+                    if (g_Player->isSkating && g_Player->skateboard) {
+                        g_Player->skateboard->gravity = val;
+                    }
+                },
+                100.0f, -100.0f
+            ),
 
+            MenuEntry("Turn Force",
+                []() -> float {
+                    return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->turnForce : 0.0f;
+                },
+                [](float num) {
+                    if (g_Player->isSkating && g_Player->skateboard) {
+                        g_Player->skateboard->turnForce = num;
+                    }
+                },
+                100.0f, -100.0f
+            )
+        };
+        
         std::vector<MenuEntry> playerItems = {
             MenuEntry("Godmode", &Features::GodMode),
-            MenuEntry("Gravity", &example, 100.0f, -100.0f),
             MenuEntry("Police Stuff", MenuPage::Police),
             MenuEntry("Infinite Money", &Features::InfiniteMoney),
             MenuEntry("Function Example", Features::SomeFunction)

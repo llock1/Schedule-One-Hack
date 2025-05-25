@@ -7,6 +7,33 @@
 
 namespace Cheat {
 
+    void UI::AddToast(const std::string& msg, float duration = 3.0f) {
+        toasts.push_back({ msg, duration});
+    }
+
+    void UI::RenderToasts() {
+        float y = 10.0f;
+        for (auto it = toasts.begin(); it != toasts.end();) {
+            ImGui::SetNextWindowPos(ImVec2(10, y), ImGuiCond_Always);
+            ImGui::Begin("##Toast", nullptr,
+                ImGuiWindowFlags_NoDecoration |
+                ImGuiWindowFlags_AlwaysAutoResize |
+                ImGuiWindowFlags_NoSavedSettings |
+                ImGuiWindowFlags_NoFocusOnAppearing |
+                ImGuiWindowFlags_NoNav);
+            ImGui::Text("%s", it->text.c_str());
+            ImGui::End();
+
+            it->timer -= ImGui::GetIO().DeltaTime;
+            if (it->timer <= 0.0f)
+                it = toasts.erase(it);
+            else
+                ++it;
+
+            y += 40.0f;
+        }
+    }
+
     void UI::HandleInput() {
         const auto& items = GetCurrentItems();
 
@@ -48,8 +75,13 @@ namespace Cheat {
             }
 
             if (entry.type == MenuEntryType::Float) {
-                float* num = std::get<float*>(entry.data);
-                *num -= numToIncreaseBy;
+                float num = entry.getFloat();
+                num -= static_cast<float>(numToIncreaseBy);
+
+                if (num > entry.maxFloat) num = entry.maxFloat;
+                if (num < entry.minFloat) num = entry.minFloat;
+
+                entry.setFloat(num);
             }
         }
 
@@ -64,8 +96,13 @@ namespace Cheat {
             }
 
             if (entry.type == MenuEntryType::Float) {
-                float* num = std::get<float*>(entry.data);
-                *num += numToIncreaseBy;
+                float num = entry.getFloat();
+                num += static_cast<float>(numToIncreaseBy);
+
+                if (num > entry.maxFloat) num = entry.maxFloat;
+                if (num < entry.minFloat) num = entry.minFloat;
+
+                entry.setFloat(num);
             }
         }
 
@@ -163,8 +200,8 @@ namespace Cheat {
                 int* num = std::get<int*>(entry.data);
                 rightText = std::format("< {} >", *num);
             } else if (entry.type == MenuEntryType::Float) {
-                float* num = std::get<float*>(entry.data);
-                rightText = std::format("< {} >", *num);
+                float num = entry.getFloat();
+                rightText = std::format("< {} >", num);
             } 
 
             ImVec2 leftSize = ImGui::CalcTextSize(leftText.c_str());
@@ -194,7 +231,7 @@ namespace Cheat {
         case MenuPage::Settings: return settingsItems;
         case MenuPage::Police: return policeItems;
         case MenuPage::Skateboard:
-            if (g_Player->isSkating) {
+            if (g_Player->isSkating && g_Player->skateboard) {
                 return skateboardItems;
             }
             return settingsItems;

@@ -158,6 +158,7 @@
     <ClInclude Include="hooks.h" />
     <ClInclude Include="libs\ImGui\imconfig.h" />
     <ClInclude Include="libs\ImGui\imgui.h" />
+    <ClInclude Include="libs\ImGui\ImGuiNotify.hpp" />
     <ClInclude Include="libs\ImGui\imgui_impl_dx11.h" />
     <ClInclude Include="libs\ImGui\imgui_impl_win32.h" />
     <ClInclude Include="libs\ImGui\imgui_internal.h" />

@@ -88,6 +88,9 @@
     <ClInclude Include="memory.h">
       <Filter>Source Files\memory</Filter>
     </ClInclude>
+    <ClInclude Include="libs\ImGui\ImGuiNotify.hpp">
+      <Filter>Source Files\libs\ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
