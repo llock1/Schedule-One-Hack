@@ -29,6 +29,13 @@
 #include "libs/ImGui/imgui_Impl_dx11.h"
 #include "libs/ImGui/imgui_Impl_win32.h"
 
+#include "types.h"
+#include "player.h"
+#include "player_crime_data.h"
+#include "player_energy.h"
+#include "skateboard.h"
+#include "player_health.h"
+#include "player_visibility.h"
 
 
 #endif //PCH_H

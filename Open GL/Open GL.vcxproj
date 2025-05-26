@@ -169,6 +169,12 @@
     <ClInclude Include="offsets.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="player_crime_data.h" />
+    <ClInclude Include="player_energy.h" />
+    <ClInclude Include="player_health.h" />
+    <ClInclude Include="player_visibility.h" />
+    <ClInclude Include="skateboard.h" />
+    <ClInclude Include="types.h" />
     <ClInclude Include="ui.h" />
   </ItemGroup>
   <ItemGroup>

@@ -54,6 +54,7 @@ namespace Cheat {
 
     HRESULT WINAPI hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags) {
         static bool initialized = false;
+        static bool show = true;
 
         if (!initialized) {
             if (SUCCEEDED(pSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)&g_pd3dDevice))) {
@@ -87,10 +88,15 @@ namespace Cheat {
         ImGui_ImplDX11_NewFrame();
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
-
-        g_UI->HandleInput();
         
-        g_UI->Render();
+        if (show) {
+            g_UI->HandleInput();
+            g_UI->Render();
+        }
+
+        if (ImGui::IsKeyPressed(ImGuiKey_Insert)) {
+            show = !show;
+        }
 
         ImGui::Render();
         g_pd3dDeviceContext->OMSetRenderTargets(1, &g_mainRenderTargetView, nullptr);

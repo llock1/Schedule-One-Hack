@@ -14,7 +14,9 @@ namespace Cheat {
         Button,
         Int,
         Float,
-        FloatButton,
+        Info,
+        InfoInt,
+        InfoFloat,
     };
 
     enum class MenuPage {
@@ -40,6 +42,12 @@ namespace Cheat {
         std::function<float()> getFloat;
         std::function<void(float)> setFloat;
 
+        std::function<bool()> getBool;
+        std::function<void(bool)> setBool;
+
+        std::function<int()> getInt;
+        std::function<void(int)> setInt;
+
         MenuEntry(std::string label, bool* togglePtr)
             : label(std::move(label)), type(MenuEntryType::Toggle), data(togglePtr) {
         }
@@ -59,6 +67,15 @@ namespace Cheat {
         MenuEntry(std::string label, std::function<float()> setNum, std::function<void(float)> setFloat, float maxNum, float minNum)
             : label(std::move(label)), type(MenuEntryType::Float), getFloat(setNum), setFloat(setFloat), maxFloat(maxNum), minFloat(minNum) {
         }
+
+        MenuEntry(std::string label)
+            : label(std::move(label)), type(MenuEntryType::Info) {
+        }
+
+        MenuEntry(std::string label, std::function<float()> getFloat, bool floatInfo )
+            : label(std::move(label)), type(MenuEntryType::InfoFloat), getFloat(getFloat) {
+        }
+
     };
 
     struct SimpleToast {
@@ -96,8 +113,24 @@ namespace Cheat {
             MenuEntry("Settings", MenuPage::Settings),
             MenuEntry("Exit", Features::Unload)
         };
-         
+        
+        std::vector<MenuEntry> skateboardFailItems = {
+            MenuEntry("You must be riding a skateboard"),
+        };
+
         std::vector<MenuEntry> skateboardItems = {
+            MenuEntry("Current Speed",
+                []() -> float {
+                    return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->currentSpeedKMH : 0.0f;
+                },
+                true
+            ),
+            MenuEntry("Current Steering Input",
+                []() -> float {
+                    return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->currentSteerInput : 0.0f;
+                },
+                true
+            ),
             MenuEntry("Gravity",
                 []() -> float {
                     return g_Player->isSkating ? g_Player->skateboard->gravity : 0.0f;
@@ -109,7 +142,17 @@ namespace Cheat {
                 },
                 100.0f, -100.0f
             ),
-
+            MenuEntry("Brake Force",
+                []() -> float {
+                    return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->brakeForce : 0.0f;
+                },
+                [](float num) {
+                    if (g_Player->isSkating && g_Player->skateboard) {
+                        g_Player->skateboard->brakeForce = num;
+                    }
+                },
+                100.0f, -100.0f
+            ),
             MenuEntry("Turn Force",
                 []() -> float {
                     return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->turnForce : 0.0f;
@@ -120,7 +163,81 @@ namespace Cheat {
                     }
                 },
                 100.0f, -100.0f
-            )
+            ),
+            MenuEntry("Turn Speed Boost",
+                []() -> float {
+                    return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->turnSpeedBoost : 0.0f;
+                },
+                [](float num) {
+                    if (g_Player->isSkating && g_Player->skateboard) {
+                        g_Player->skateboard->turnSpeedBoost = num;
+                    }
+                },
+                100.0f, -100.0f
+             ),
+
+             MenuEntry("Reverse Max KMH",
+                 []() -> float {
+                     return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->reverseTopSpeedKMH : 0.0f;
+                 },
+                 [](float num) {
+                     if (g_Player->isSkating && g_Player->skateboard) {
+                         g_Player->skateboard->reverseTopSpeedKMH = num;
+                     }
+                 },
+                 100.0f, -100.0f
+             ),
+
+            MenuEntry("Jump Forward Boost",
+                 []() -> float {
+                     return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->jumpForwardBoost : 0.0f;
+                 },
+                 [](float num) {
+                     if (g_Player->isSkating && g_Player->skateboard) {
+                         g_Player->skateboard->jumpForwardBoost = num;
+                     }
+                 },
+                 100.0f, -100.0f
+             ),
+
+            MenuEntry("Jump Forward Force",
+                 []() -> float {
+                     return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->jumpForwardForce : 0.0f;
+                 },
+                 [](float num) {
+                     if (g_Player->isSkating && g_Player->skateboard) {
+                         g_Player->skateboard->jumpForwardForce = num;
+                     }
+                 },
+                 100.0f, -100.0f
+             ),
+
+            MenuEntry("Push Force Multiplier",
+                 []() -> float {
+                     return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->pushForceMultiplier : 0.0f;
+                 },
+                 [](float num) {
+                     if (g_Player->isSkating && g_Player->skateboard) {
+                         g_Player->skateboard->pushForceMultiplier = num;
+                     }
+                 },
+                 100.0f, -100.0f
+             ),
+
+             MenuEntry("Push Force Duration",
+             []() -> float {
+                 return g_Player->isSkating && g_Player->skateboard ? g_Player->skateboard->pushForceDuration : 0.0f;
+                 },
+                [](float num) {
+                    if (g_Player->isSkating && g_Player->skateboard) {
+                        g_Player->skateboard->pushForceDuration = num;
+                    }
+                },
+                100.0f, -100.0f
+            ),
+             
+
+
         };
         
         std::vector<MenuEntry> playerItems = {

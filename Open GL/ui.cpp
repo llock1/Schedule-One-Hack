@@ -202,7 +202,14 @@ namespace Cheat {
             } else if (entry.type == MenuEntryType::Float) {
                 float num = entry.getFloat();
                 rightText = std::format("< {} >", num);
-            } 
+            }
+            else if (entry.type == MenuEntryType::Info) {
+                rightText = "";
+            }
+            else if (entry.type == MenuEntryType::InfoFloat) {
+                float num = entry.getFloat();
+                rightText = std::format("{:.2f}", num);
+            }
 
             ImVec2 leftSize = ImGui::CalcTextSize(leftText.c_str());
             ImVec2 rightSize = ImGui::CalcTextSize(rightText.c_str());
@@ -234,7 +241,7 @@ namespace Cheat {
             if (g_Player->isSkating && g_Player->skateboard) {
                 return skateboardItems;
             }
-            return settingsItems;
+            return skateboardFailItems;
         }
         static std::vector<MenuEntry> empty;
         return empty;

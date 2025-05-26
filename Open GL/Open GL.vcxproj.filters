@@ -35,6 +35,9 @@
     <Filter Include="Source Files\memory">
       <UniqueIdentifier>{8f9a1039-1b80-45ab-a3ac-a99eb3038504}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\classes\skateboard">
+      <UniqueIdentifier>{c08a8f9f-a596-41ac-84a8-044ee4b2432f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -90,6 +93,24 @@
     </ClInclude>
     <ClInclude Include="libs\ImGui\ImGuiNotify.hpp">
       <Filter>Source Files\libs\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="player_energy.h">
+      <Filter>Source Files\classes\player</Filter>
+    </ClInclude>
+    <ClInclude Include="player_crime_data.h">
+      <Filter>Source Files\classes\player</Filter>
+    </ClInclude>
+    <ClInclude Include="types.h">
+      <Filter>Source Files\classes\player</Filter>
+    </ClInclude>
+    <ClInclude Include="player_health.h">
+      <Filter>Source Files\classes\player</Filter>
+    </ClInclude>
+    <ClInclude Include="player_visibility.h">
+      <Filter>Source Files\classes\player</Filter>
+    </ClInclude>
+    <ClInclude Include="skateboard.h">
+      <Filter>Source Files\classes\skateboard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
